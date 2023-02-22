@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title></title>
+    <script>
+      $(document).ready(function () {
+        $("#addnewb").click(function () {
+          $("#addnew").toggle(500);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1 style="margin-left: 20px">Add new subject</h1>
+    <form
+      class="container-fluid"
+      action="http://127.0.0.1:5000/newsub"
+      method="POST"
+    >
+      <div class="row">
+        <div class="col-md-4 col-xs-6">
+          <label>Subject Code</label>
+          <input
+            name="subject_code"
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            placeholder="text1"
+          />
+        </div>
+        <div class="col-md-4 col-xs-6">
+          <label>Subject Name</label>
+          <input
+            name="subject_name"
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            placeholder="text2"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 col-xs-12">
+          <label>Syllabus</label>
+          <textarea class="form-control" rows="9" name="syllabus"></textarea>
+        </div>
+      </div>
+      <br />
+      <button type="button" class="btn btn-success" id="addnewb">
+        Add New Validator
+      </button>
+      <div class="row" id="addnew" style="display: none">
+        <div class="col-md-4 col-xs-8">
+          <label>Validator email</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            placeholder="text3"
+            name="valem"
+          />
+        </div>
+        <div class="col-md-4 col-xs-8">
+          <label>Validator Password</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            placeholder="text4"
+            name="valpass"
+          />
+        </div>
+        <div class="col-md-4 col-xs-8">
+          <label>Validator Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            placeholder="text4"
+            name="valname"
+          />
+        </div>
+      </div>
+
+      <br />
+      <br />
+      <button type="submit" class="btn btn-primary">OK</button>
+      <button type="button" class="btn btn-info">CANCEL</button>
+    </form>
+  </body>
+</html>

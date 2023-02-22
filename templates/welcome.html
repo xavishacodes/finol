@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename = 'welcome.css')}}"
+    />
+    <link rel="stylesheet" type="text/css" href="../static/welcome.css" />
+  </head>
+  <body>
+    <div class="main">
+      <h1 class="name">Hi, {{name}}</h1>
+      <h3 class="email">What do you want to do?</h3>
+      <div id="buttons" class="container">
+        <a href="http://127.0.0.1:5000/upload">
+          <button class="btn btn-1">Upload Questions</button>
+        </a>
+        <a href="http://127.0.0.1:5000/download">
+          <button class="btn btn-2">Download Q/P</button>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

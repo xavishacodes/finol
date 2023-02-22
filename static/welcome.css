@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  background-color: #e0e0e0;
+}
+
+.main {
+  /* width: 60vw;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  text-align: center;
+  margin-top: 20vh; */
+  background-color: #e0e0e0;
+  margin-left: 3vw;
+}
+
+.name {
+  font-size: 300%;
+  font-family: monospace;
+}
+
+.email {
+  font-size: 150%;
+  color: #404040;
+  font-family: monospace;
+}
+
+#buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 23vh;
+}
+
+button.btn {
+  font-family: monospace;
+  background: transparent;
+  color: black;
+  border: 2px solid black;
+  font-size: 20px;
+  letter-spacing: 2px;
+  padding: 25px 80px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-block;
+  margin: 15px 30px;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+button.btn-1:hover {
+  background-color: white;
+  color: black;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+button.btn-2 {
+  overflow: hidden;
+  position: relative;
+}
+
+button.btn-2:hover {
+  background: #fff;
+  color: black;
+}
+
+button.btn-2:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+  width: 100%;
+  height: 0;
+  top: 0;
+  left: 0;
+  background: #fff;
+}
+
+button.btn-2:hover:after,
+button.btn-2:active:after {
+  height: 100%;
+}
