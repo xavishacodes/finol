@@ -1,16 +1,15 @@
 <html>
   <head>
     <title>Validaatavin pakkam</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename = 'welcome.css')}}"
+    />
   </head>
   <body>
-    <h1>Hello da vendru validataa!</h1>
-    <!-- <h2>List of available subjects</h2>
-    {% for p in places %} -->
+    <h1>Hello Validator</h1>
     <h2>{{ email }}</h2>
     <h3>{{ validator_subject_name }}</h3>
-    <!-- {% endfor %} -->
-    <!-- <a href="http://127.0.0.1:5000/add">
-      <button class="btn btn-1">Add new subject</button>
-    </a> -->
   </body>
 </html>

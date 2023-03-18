@@ -53,13 +53,14 @@
                   name="question_0"
                   type="text"
                   class="form-control m-input"
+                  placeholder="question"
                 />
                 <select
                   name="mark_0"
                   class="form-select form-select-lg"
                   aria-label=".form-select-lg example"
                 >
-                  <option selected>Choose Subject</option>
+                  <option selected>Marks</option>
                   <option value="1">One</option>
                   <option value="2">Two</option>
                   <option value="3">Three</option>
@@ -69,7 +70,7 @@
                   class="form-select form-select-lg"
                   aria-label=".form-select-lg example"
                 >
-                  <option selected>Choose Subject</option>
+                  <option selected>Difficulty Level</option>
                   <option value="1">One</option>
                   <option value="2">Two</option>
                   <option value="3">Three</option>
@@ -79,7 +80,7 @@
                   class="form-select form-select-lg"
                   aria-label=".form-select-lg example"
                 >
-                  <option selected>Choose Subject</option>
+                  <option selected>Course outcome</option>
                   <option value="1">One</option>
                   <option value="2">Two</option>
                   <option value="3">Three</option>
@@ -89,7 +90,7 @@
                   class="form-select form-select-lg"
                   aria-label=".form-select-lg example"
                 >
-                  <option selected>Choose Subject</option>
+                  <option selected>Knowledge outcome</option>
                   <option value="1">One</option>
                   <option value="2">Two</option>
                   <option value="3">Three</option>
@@ -119,13 +120,13 @@
         temp += 1;
         newRowAdd =
           '<div id="row"> <div class="input-group m-3">' +
-          '<input type="text" name="question_' +
+          '<input type="text" placeholder="question" name="question_' +
           temp +
           '" class="form-control m-input"> ' +
           '<select name="mark_' +
           temp +
           '" class="form-select form-select-lg" aria-label=".form-select-lg example">' +
-          "<option selected>Choose Subject</option>" +
+          "<option selected>Marks</option>" +
           '<option value="1">One</option>' +
           '<option value="2">Two</option>' +
           '<option value="3">Three</option>' +
@@ -133,7 +134,7 @@
           '<select name="co_' +
           temp +
           '" class="form-select form-select-lg" aria-label=".form-select-lg example">' +
-          "<option selected>Choose Subject</option>" +
+          "<option selected>Difficulty Level</option>" +
           '<option value="1">One</option>' +
           '<option value="2">Two</option>' +
           '<option value="3">Three</option>' +
@@ -141,7 +142,7 @@
           '<select name="ko_' +
           temp +
           '" class="form-select form-select-lg" aria-label=".form-select-lg example">' +
-          "<option selected>Choose Subject</option>" +
+          "<option selected>Course outcome</option>" +
           '<option value="1">One</option>' +
           '<option value="2">Two</option>' +
           '<option value="3">Three</option>' +
@@ -149,7 +150,7 @@
           '<select name="difflev_' +
           temp +
           '" class="form-select form-select-lg" aria-label=".form-select-lg example">' +
-          "<option selected>Choose Subject</option>" +
+          "<option selected>Knowledge outcome</option>" +
           '<option value="1">One</option>' +
           '<option value="2">Two</option>' +
           '<option value="3">Three</option>' +

@@ -2,12 +2,38 @@
   <head>
     <title>Download Specifications</title>
     <body>
-      <form name="downform">
+      <form
+        name="downform"
+        action="http://127.0.0.1:5000/downproc"
+        method="POST"
+      >
         {% for spec in range(specs[2]|int) %}
         <h1>Section {{spec}}</h1>
         {% for blah in range(specs[3+(2*spec)]|int) %}
-        <p>link {{blah}}</p>
+        <p>Question {{blah}}</p>
+        <select
+          name="'section_{{spec}}_question_{{blah}}_co'"
+          class="form-select form-select-lg"
+          aria-label=".form-select-lg example"
+        >
+          <option selected>Choose CO-level</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+        <select
+          name="'section_{{spec}}_question_{{blah}}_di'"
+          class="form-select form-select-lg"
+          aria-label=".form-select-lg example"
+        >
+          <option selected>Choose Diff level</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
         {% endfor %} {% endfor %}
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </body>
   </head>
