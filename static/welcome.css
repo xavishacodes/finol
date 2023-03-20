@@ -1,6 +1,7 @@
 body {
   margin: 0;
-  background-color: #e0e0e0;
+  /* background-color: #e0e0e0; */
+  background-image: url("4.jpg");
 }
 
 .main {
@@ -9,18 +10,22 @@ body {
   padding-bottom: 100px;
   text-align: center;
   margin-top: 20vh; */
-  background-color: #e0e0e0;
+  /* background-color: #e0e0e0; */
   margin-left: 3vw;
 }
 
 .name {
-  font-size: 300%;
-  font-family: monospace;
+  font-size: 50px;
+  margin-top: 4cm;
+  text-align: center;
+  color: #DCCAA0;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .email {
-  font-size: 150%;
-  color: #404040;
+  font-size: 30px;
+  color: #DCCAA0;
+  text-align: center;
   font-family: monospace;
 }
 
@@ -28,14 +33,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 23vh;
+  margin-top: 12vh;
 }
 
 button.btn {
   font-family: monospace;
   background: transparent;
-  color: black;
-  border: 2px solid black;
+  color: #DCCAA0;
+  border: 2px solid #DCCAA0;
   font-size: 20px;
   letter-spacing: 2px;
   padding: 25px 80px;
@@ -49,11 +54,12 @@ button.btn {
 }
 
 button.btn-1:hover {
-  background-color: white;
-  color: black;
+  background-color: rgb(212, 211, 118);
+  color: rgb(0, 0, 0);
   -webkit-transition: all 0.4s;
   -moz-transition: all 0.4s;
   transition: all 0.4s;
+  opacity: 0.8;
 }
 
 button.btn-2 {
@@ -62,8 +68,9 @@ button.btn-2 {
 }
 
 button.btn-2:hover {
-  background: #fff;
-  color: black;
+  background: rgb(212, 211, 118);
+  color: rgb(0, 0, 0);
+  opacity: 0.8;
 }
 
 button.btn-2:after {
@@ -77,7 +84,8 @@ button.btn-2:after {
   height: 0;
   top: 0;
   left: 0;
-  background: #fff;
+  /* color: white; */
+  background: rgb(212, 211, 118);
 }
 
 button.btn-2:hover:after,

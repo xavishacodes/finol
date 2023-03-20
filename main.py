@@ -1,7 +1,8 @@
 import pyrebase
 import logging
 import sys
-from flask import Flask, flash, redirect, render_template, request, session, abort, url_for
+import flask
+from flask import Flask, flash, redirect, render_template, request, jsonify, session, abort, url_for
 from flask import render_template
 from flask import make_response
 import pdfkit
@@ -149,8 +150,9 @@ def downroc1():
     else:
         return redirect(url_for('login'))
     
-@app.route("/downproc", methods=["POST","GET"])
-def downproc():
+
+@app.route("/tempdownproc", methods=["POST","GET"])
+def tempdownproc():
     if person["is_logged_in"] == True:
         if request.method == "POST":
             res1 = list(request.form.listvalues())
@@ -158,6 +160,7 @@ def downproc():
             for i in res1:
                 res2.extend(i)
             print(res2)
+        
         name = "Sharwin Xavier R"
         html = render_template(
             "certificate.html",
@@ -170,29 +173,105 @@ def downproc():
     else:
         return redirect(url_for('login'))
 
+@app.route("/downproc", methods=["POST","GET"])
+def downproc():
+    if(person["is_logged_in"]==True):
+        return "hi"
+    
 @app.route("/uproc", methods=["POST","GET"])
 def uproc():
     if request.method == "POST":
         res1 = list(request.form.listvalues())
+        print(res1)
         res2=[]
         for i in res1:
             res2.extend(i)
         a=res2.pop(0)
         print(res2)
+        print(a)
+        syll = db.child("subjects").order_by_child("subject code").equal_to(a).get()
+        # print(list(syll.val().items())[0][1])
+        tes1 = syll.val().items()
+        print(tes1)
+        tes2=[]
+        for l in tes1:
+            tes2.extend(l)
+        print(tes2[1]["syllabus"])
+        
+        # print(list(syll.val().items())[0])
+        # syllspl = list(syll.val().items()).split()
+        syllspl = tes2[1]["syllabus"].split()
+        
         try:
             for i in range(0,len(res2),5):
+                match_percentage = 0
                 global question
                 question_details = {"question":res2[i],"mark":res2[i+1],"co_level":res2[i+2],"ko_level":res2[i+3],"difflev":res2[i+4]}
                 temp = db.child("questions").child(a).get()
                 print(temp.val())
-                
-                if(temp.val() is not None):
-                    db.child("questions").child(a).child(str(len(temp.val()))).set(question_details)
+                temp2 = db.child("pending_questions").child(a).get()
+                splque = res2[i].split()
+                lensplque = len(splque)
+                for j in splque:
+                    for k in syllspl:
+                        if(j==k):
+                            match_percentage += (1/lensplque)*100
+                            break
+                print(match_percentage)
+                if(match_percentage>=20):
+                    if(temp.val() is not None):
+                        db.child("questions").child(a).child(str(len(temp.val()))).set(question_details)
+                    else:
+                        db.child("questions").child(a).child("0").set(question_details)
                 else:
-                    db.child("questions").child(a).child("0").set(question_details)
+                    if(temp2.val() is not None):
+                        db.child("pending_questions").child(a).child(str(len(temp2.val()))).set(question_details)
+                    else:
+                        db.child("pending_questions").child(a).child("0").set(question_details)
+                    # temp2 = db.child("validators").order_by_child("validator subject").equal_to(a).get()
+                    # print(temp2.val())
+                    # if(temp2.val() is not None):
+
+                    #     db.child("validators").order_by_child("validator subject").equal_to(a).child("pending").child(str(len(temp2.val()))).set(question_details)
+                    # else:
+                    #     db.child("validators").order_by_child("validator subject").equal_to(a).child("pending").child("0").set(question_details)
             return 'hi'
         except:
             return 'failed'
+        
+
+# @app.route('/valdec', methods=["POST", "GET"])
+# def valdec():
+#   if request.method == 'POST':
+#     data = request.get_json()
+#     query = data['query']
+#     print(query)
+#     # layout = flask.request.args.get('layout')
+#     # print(layout)
+# #   return Flask.jsonify({'html':Flask.render_template('station.html',target=layout)})
+#     return 'hibbo'
+#   else:
+#       return "hobbo"
+
+
+@app.route('/api/questions/<subjectcode>/<question>/accept', methods=['POST'])
+def accept_question(subjectcode, question):
+    print(subjectcode,question)
+    valpro = db.child('pending_questions').child(subjectcode).order_by_child("question").equal_to(question).get()
+    
+    # db.child("subjects").child(str(len(sub_list_1.val()))).set(subject_details)
+    stemp = db.child("questions").child(subjectcode).get()
+    que_det = list(valpro.val().items())[0][1]
+    db.child("questions").child(subjectcode).child(str(len(stemp.val()))).set(que_det)
+    db.child("pending_questions").child(subjectcode).child(list(valpro.val().items())[0][0]).remove()
+    return jsonify({'success': True})
+    
+
+@app.route('/api/questions/<subjectcode>/<question>/reject', methods=['DELETE'])
+def reject_question(subjectcode,question):
+    valpro1 = db.child('pending_questions').child(subjectcode).order_by_child("question").equal_to(question).get()
+    db.child("pending_questions").child(subjectcode).child(list(valpro1.val().items())[0][0]).remove()
+    return jsonify({'success': True})
 
 #If someone clicks on login, they are redirected to /result
 @app.route("/result", methods = ["POST", "GET"])
@@ -264,17 +343,6 @@ def vresult():
                 # print(email, password)
                 if flag==1:
                     print("blah")
-                    # page = auth.list_users()
-                    # while page:
-                    #     for user in page.users:
-                    #         print('User: ' + user.uid)
-                    #     # Get next batch of users.
-                    #     page = page.get_next_page()
-
-                    # # Iterate through all users. This will still retrieve users in batches,
-                    # # buffering no more than 1000 users in memory at a time.
-                    # for user in auth.list_users().iterate_all():
-                    #     print('User: ' + user.uid)
                     user1 = auth.sign_in_with_email_and_password(email, password)
                     print("blah1")
                     global person2
@@ -284,28 +352,10 @@ def vresult():
                     person2["name"] = name
                     person2["vsub"] = temp
                     person2["vsubname"] = temp1
+                    # person2["pending"] 
                     print("blah2")
                     return redirect(url_for('vallist'))
-                    # return render_template("vallist.html", email=email, password=password, validator_subject = temp, validator_subject_name=temp1, uid1=lid)
-                    # return render_template("vallist.html")
-                # print("jojo")
-                # return 'hi'
-            #Try signing in the user with the given information
-            # user = auth.sign_in_with_email_and_password(email, password)
-            # #Insert the user data in the global person
-            # global person
-            # person["is_logged_in"] = True
-            # person["email"] = user["email"]
-            # person["uid"] = user["localId"]
-            # # Get the name of the user
-            # if(person["email"]=='admin1@gmail.com'):    
-            #     data=db.child("admin").get()
-            #     person["name"] = data.val()[person["uid"]]["name"]
-            #     return redirect(url_for('dashboard'))
-            # else:
-            #     data = db.child("users").get()
-            #     person["name"] = data.val()[person["uid"]]["name"]
-            #     return redirect(url_for('welcome'))
+               
         except:
             return redirect(url_for('login'))
     else:
@@ -318,7 +368,15 @@ def vresult():
 @app.route("/vallist")
 def vallist():
     if person2["is_logged_in"] == True:
-        return render_template("vallist.html", email = person2["email"], name = person2["name"], validator_subject = person2["vsub"], validator_subject_name = person2["vsubname"])
+        pen_det = db.child("pending_questions").child(person2["vsub"]).get()
+        temproc = pen_det.val()
+        # fes = len(temproc)
+        if temproc is None:
+            fes=0
+        else:
+            fes = len(temproc)
+        
+        return render_template("vallist.html", email = person2["email"], name = person2["name"], validator_subject = person2["vsub"], validator_subject_name = person2["vsubname"], specs1 = temproc, len1 = fes)
         # return render_template("vallist.html", email = "blah!")
         # return 'hi'
     else:
@@ -372,10 +430,6 @@ def register():
             return redirect(url_for('register'))
     else:
         if person["is_logged_in"] == True:
-            #  if(name=="admin" and email=="admin@qgen.com"):   #password = admin@qgen
-            #     return redirect(url_for('dashboard'))
-            #  else:
-            #Go to welcome page
             return redirect(url_for('welcome'))
         else:
             return redirect(url_for('register'))

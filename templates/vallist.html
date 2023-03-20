@@ -1,15 +1,125 @@
 <html>
   <head>
-    <title>Validaatavin pakkam</title>
-    <link
+    <title>Validator's Page</title>
+    <!-- <link
       rel="stylesheet"
       type="text/css"
       href="{{url_for('static', filename = 'welcome.css')}}"
+    /> -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
     />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
     <h1>Hello Validator</h1>
     <h2>{{ email }}</h2>
-    <h3>{{ validator_subject_name }}</h3>
+
+    <h3
+      id="subjectc"
+      data-rep="'{{ validator_subject }}'"
+      value="'{{ validator_subject }}'"
+    >
+      {{ validator_subject }}
+    </h3>
+    <div class="card-deck">
+      {% for i in range(len1|int) %}
+      <div class="card" style="width: 18rem; display: inline-block">
+        <div class="card-body">
+          <h5 class="card-title need" value="'{{ i }}">Question {{i}}</h5>
+          <p class="card-text need" value="'{{ specs1[i]['question'] }}'">
+            {{ specs1[i]["question"] }}
+          </p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li
+            class="list-group-item need"
+            value="'{{ specs1[i]['co_level'] }}'"
+          >
+            Course outcome - {{ specs1[i]["co_level"] }}
+          </li>
+          <li
+            class="list-group-item need"
+            value="'{{ specs1[i]['ko_level'] }}'"
+          >
+            Knowledge outcome - {{ specs1[i]["ko_level"] }}
+          </li>
+          <li class="list-group-item need" value="'{{ specs1[i]['mark'] }}'">
+            Marks - {{ specs1[i]["mark"] }}
+          </li>
+          <li
+            value="' {{ specs1[i]['diff_lev'] }} '"
+            class="list-group-item need"
+          >
+            Difficulty level - {{ specs1[i]["difflev"] }}
+          </li>
+        </ul>
+        <div class="card-body">
+          <button
+            type="submit"
+            name="accept"
+            value="accept"
+            class="card-link qtemp btn btn-success accept-button need"
+            data-question-id="{{ specs1[i]['question'] }}"
+          >
+            Accept
+          </button>
+          <button
+            type="submit"
+            name="reject"
+            value="reject"
+            class="card-link btn btn-danger reject-button need"
+            data-question-id="{{ specs1[i]['question'] }}"
+          >
+            Reject
+          </button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $(".accept-button").click(function () {
+          // var subjectcode = $(this).data("rep");
+          var subjectcode = "{{ validator_subject }}";
+          var card = $(this).closest(".card");
+          console.log(subjectcode);
+          var questionId = $(this).data("question-id");
+          $.post(
+            "/api/questions/" + subjectcode + "/" + questionId + "/accept",
+            function (data) {
+              if (data.success) {
+                // Remove the card from the page
+                card.remove();
+              }
+            }
+          );
+        });
+
+        $(".reject-button").click(function () {
+          var subjectcode = "{{ validator_subject }}";
+          var questionId = $(this).data("question-id");
+          var card = $(this).closest(".card");
+          $.ajax({
+            url: "/api/questions/" + subjectcode + "/" + questionId + "/reject",
+            type: "DELETE",
+            success: function (data) {
+              if (data.success) {
+                // Remove the card from the page
+                card.remove();
+              }
+            },
+          });
+        });
+      });
+    </script>
   </body>
 </html>

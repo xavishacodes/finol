@@ -3,7 +3,7 @@
 /* BASIC */
 
 html {
-  background-color: #22688e;
+  background-image: url("4.jpg");
 }
 
 body {
@@ -12,7 +12,7 @@ body {
 }
 
 a {
-  color: #92badd;
+  color: #f7e094;
   display: inline-block;
   text-decoration: none;
   font-weight: 400;
@@ -25,7 +25,7 @@ h2 {
   text-transform: uppercase;
   display: inline-block;
   margin: 40px 8px 10px 8px;
-  color: #cccccc;
+  color: #DCCAA0;
 }
 
 /* STRUCTURE */
@@ -43,23 +43,26 @@ h2 {
 #formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
-  background: #fff;
+  background: #000;
   padding: 30px;
   width: 90%;
+  opacity: 0.8;
   max-width: 450px;
   position: relative;
+  -webkit-box-shadow: 10 0 0 10 #6d632c;
+  /* box-shadow: 10px 0px 0px 10px #f3d46f; */
   /* align-items: right; */
   /* right: 0px; */
   /* float: right !important; */
   padding: 0px;
-  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
-  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: #DCCAA0;
+  box-shadow: #DCCAA0;
   text-align: center;
 }
 
 #formFooter {
-  background-color: #f6f6f6;
-  border-top: 1px solid #dce8f1;
+  background-color: #DCCAA0;
+  border-top: 1px solid #DCCAA0;
   padding: 25px;
   text-align: center;
   -webkit-border-radius: 0 0 10px 10px;
@@ -69,12 +72,12 @@ h2 {
 /* TABS */
 
 h2.inactive {
-  color: #cccccc;
+  color: #DCCAA0;
 }
 
 h2.active {
-  color: #0d0d0d;
-  border-bottom: 2px solid #5fbae9;
+  color: #ddc690;
+  border-bottom: 2px solid #ffe89b;
 }
 
 /* FORM TYPOGRAPHY*/
@@ -82,9 +85,9 @@ h2.active {
 input[type="button"],
 input[type="submit"],
 input[type="reset"] {
-  background-color: #56baed;
+  background-color: #131212;
   border: none;
-  color: white;
+  color: #f3d46f;
   padding: 15px 80px;
   text-align: center;
   text-decoration: none;
@@ -92,8 +95,8 @@ input[type="reset"] {
   text-transform: uppercase;
   font-size: 13px;
   width: 85%;
-  -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
-  box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+  -webkit-box-shadow: 0 10px 10px 0 #6d632c;
+  box-shadow: 0 0px 10px 0 #f3d46f;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   margin: 5px 20px 40px 20px;
@@ -107,7 +110,7 @@ input[type="reset"] {
 input[type="button"]:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover {
-  background-color: #39ace7;
+  background-color: #776b45;
 }
 
 input[type="button"]:active,
@@ -123,9 +126,9 @@ input[type="reset"]:active {
 input[type="email"],
 input[type="password"],
 input[type="text"] {
-  background-color: #f6f6f6;
+  background-color: #ffffff;
   border: none;
-  color: #0d0d0d;
+  color: #ddc690;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -133,7 +136,7 @@ input[type="text"] {
   font-size: 16px;
   margin: 5px;
   width: 85%;
-  border: 2px solid #f6f6f6;
+  border: 2px solid #DCCAA0;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;
@@ -146,14 +149,15 @@ input[type="text"] {
 input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="text"]:focus {
-  background-color: #fff;
-  border-bottom: 2px solid #5fbae9;
+  background-color: #000;
+  color: white;
+  border-bottom: 2px solid #F8C30F;
 }
 
 input[type="email"]:placeholder,
 input[type="password"]:placeholder,
 input[type="text"]:placeholder {
-  color: #cccccc;
+  color: #DCCAA0;
 }
 
 /* ANIMATIONS */
@@ -257,6 +261,7 @@ input[type="text"]:placeholder {
   -webkit-animation-delay: 1s;
   -moz-animation-delay: 1s;
   animation-delay: 1s;
+  color: white;
 }
 
 /* Simple CSS3 Fade-in Animation */
@@ -266,13 +271,13 @@ input[type="text"]:placeholder {
   bottom: -10px;
   width: 0;
   height: 2px;
-  background-color: #56baed;
+  background-color: #ffffff;
   content: "";
   transition: width 0.2s;
 }
 
 .underlineHover:hover {
-  color: #0d0d0d;
+  color: #ddc690;
 }
 
 .underlineHover:hover:after {
