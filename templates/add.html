@@ -10,8 +10,38 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <style>
+      body {
+        background-image: url("static/4.jpg");
+        padding-left: 25px;
+        padding-top: 12px;
+      }
+      .btn.btn-info {
+        margin-left: 7px;
+      }
+      .l1 {
+        font-size: 18px;
+        color: #dccaa0;
+        padding-bottom: 12px;
+        padding-top: 25px;
+        padding-right: 5px;
+      }
 
-    <title></title>
+      .le {
+        font-size: 40px;
+        color: #dccaa0;
+        margin: 20px;
+      }
+      .l {
+        font-size: 18px;
+        color: #dccaa0;
+        padding-bottom: 12px;
+        padding-top: 12px;
+        padding-right: 5px;
+      }
+    </style>
+
+    <title>Add Subject</title>
     <script>
       $(document).ready(function () {
         $("#addnewb").click(function () {
@@ -21,7 +51,7 @@
     </script>
   </head>
   <body>
-    <h1 style="margin-left: 20px">Add new subject</h1>
+    <p class="le">Add new subject</p>
     <form
       class="container-fluid"
       action="http://127.0.0.1:5000/newsub"
@@ -29,30 +59,30 @@
     >
       <div class="row">
         <div class="col-md-4 col-xs-6">
-          <label>Subject Code</label>
+          <label class="l">Subject Code</label>
           <input
             name="subject_code"
             type="text"
             class="form-control"
             id="exampleInputEmail1"
-            placeholder="text1"
+            placeholder="Subject code"
           />
         </div>
         <div class="col-md-4 col-xs-6">
-          <label>Subject Name</label>
+          <label class="l">Subject Name</label>
           <input
             name="subject_name"
             type="text"
             class="form-control"
             id="exampleInputEmail1"
-            placeholder="text2"
+            placeholder="Subject name"
           />
         </div>
       </div>
 
       <div class="row">
-        <div class="col-md-12 col-xs-12">
-          <label>Syllabus</label>
+        <div class="col-md-8 col-xs-12">
+          <label class="l">Syllabus</label>
           <textarea class="form-control" rows="9" name="syllabus"></textarea>
         </div>
       </div>
@@ -62,32 +92,32 @@
       </button>
       <div class="row" id="addnew" style="display: none">
         <div class="col-md-4 col-xs-8">
-          <label>Validator email</label>
+          <label class="l1">Validator email</label>
           <input
             type="text"
             class="form-control"
             id="exampleInputEmail1"
-            placeholder="text3"
+            placeholder="Validator email"
             name="valem"
           />
         </div>
         <div class="col-md-4 col-xs-8">
-          <label>Validator Password</label>
+          <label class="l1">Validator Password</label>
           <input
             type="text"
             class="form-control"
             id="exampleInputEmail1"
-            placeholder="text4"
+            placeholder="Validator Password"
             name="valpass"
           />
         </div>
         <div class="col-md-4 col-xs-8">
-          <label>Validator Name</label>
+          <label class="l1">Validator Name</label>
           <input
             type="text"
             class="form-control"
             id="exampleInputEmail1"
-            placeholder="text4"
+            placeholder="Validator Name"
             name="valname"
           />
         </div>

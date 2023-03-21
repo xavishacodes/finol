@@ -1,0 +1,49 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 20px;
+  border-left-width: 10px;
+  padding-top: 50px;
+  background-image: url("4.jpg");
+}
+html, body {overflow: hidden}
+
+.le{
+  font-size: 3rem;
+  color: #DCCAA0;
+  padding-bottom: 20px;
+}
+.l{
+  font-size: 18px;
+  color: #DCCAA0;
+  padding-bottom: 12px;
+  padding-top: 12px;
+  padding-right: 5px;
+}
+
+.l1{
+  font-size: 18px;
+  color: #DCCAA0;
+  padding-bottom: 12px;
+  padding-top: 20px;
+  padding-right: 5px;
+}
+
+.form-select.form-select-lg
+{
+  padding-bottom: 3px;
+  padding-left: 3px;
+  padding-top: 3px;
+  padding-right: 3px;
+}
+
+.input#marks{
+margin-left: 5px;
+margin-right: 5px;
+}
+
+.btn.btn-info{
+margin-left: 7px;
+}
