@@ -93,8 +93,13 @@
           var card = $(this).closest(".card");
           console.log(subjectcode);
           var questionId = $(this).data("question-id");
+          var encodedQuestionId = encodeURIComponent(questionId);
           $.post(
-            "/api/questions/" + subjectcode + "/" + questionId + "/accept",
+            "/api/questions/" +
+              subjectcode +
+              "/" +
+              encodedQuestionId +
+              "/accept",
             function (data) {
               if (data.success) {
                 // Remove the card from the page

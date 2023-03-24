@@ -141,12 +141,12 @@ def download():
 def downroc1():
     if person["is_logged_in"] == True:
         if request.method == "POST":
-            res1 = list(request.form.listvalues())
-            res2=[]
-            for i in res1:
-                res2.extend(i)
-            print(res2)
-        return render_template("downroc1.html", email=person["email"], name = person["name"], specs=res2)
+            ress1 = list(request.form.listvalues())
+            ress2=[]
+            for i in ress1:
+                ress2.extend(i)
+            print(ress2)
+        return render_template("downroc1.html", email=person["email"], name = person["name"], specs=ress2)
     else:
         return redirect(url_for('login'))
     
@@ -160,7 +160,36 @@ def tempdownproc():
             for i in res1:
                 res2.extend(i)
             print(res2)
+        specis = res2[0:3]
+        print(specis)
+        que_specis=res2[3:3+int(res2[2])*2]
+        print(que_specis)
+        res2=res2[len(specis)+len(que_specis):]
+        print(res2)
+        # flag=0
+        section_requirements = [[] for i in range(int(specis[2]))]
+        j=0
+        k=0
+        for i in range(0,len(que_specis),2):
+            print(que_specis[i])
+            temp = int(que_specis[i])
+            marks = int(que_specis[i+1])//int(que_specis[i])
+            while(temp):
+                section_requirements[k].append(res2[j])
+                j=j+1
+                section_requirements[k].append(res2[j])
+                j=j+1
+                section_requirements[k].append(marks)
+                # j=j+1
+                temp=temp-1
+            k=k+1
+        print(section_requirements)
+        # for i in range(0,len(section_requirements)):
+        #     for j in range(0,len(section_requirements[i]),3):
+        #         if(j==0):
+        #             reto = db.child("questions").child(specis[0]).order_by_child("") 
         
+
         name = "Sharwin Xavier R"
         html = render_template(
             "certificate.html",
@@ -421,10 +450,6 @@ def register():
                 return redirect(url_for('vallist'))
             else:
                 return redirect(url_for('welcome'))
-            # else:
-            #     db.child("users").child(person["uid"]).set(data)
-            # #Go to welcome page
-            #     return redirect(url_for('welcome'))
         except:
             #If there is any error, redirect to register
             return redirect(url_for('register'))
