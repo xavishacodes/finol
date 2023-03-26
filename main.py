@@ -29,7 +29,6 @@ person1 = {"is_logged_in": False, "name": "", "email": "", "uid": "", "vsub": ""
 person2 = {"is_logged_in": False, "name": "", "email": "", "uid": "", "vsub": "", "vsubname" : ""}
 
 config1 = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
-
 #Login
 @app.route("/")
 def login():
@@ -183,17 +182,35 @@ def tempdownproc():
                 # j=j+1
                 temp=temp-1
             k=k+1
-        print(section_requirements)
-        # for i in range(0,len(section_requirements)):
-        #     for j in range(0,len(section_requirements[i]),3):
-        #         if(j==0):
-        #             reto = db.child("questions").child(specis[0]).order_by_child("") 
         
-
+        print(section_requirements)
+        temp1=[]
+        tempdict = {}
+        for i in range(0,len(section_requirements)):
+            for j in range(0,len(section_requirements[i]),3):
+                if(j==0):
+                    reto = db.child("questions").child(specis[0]).order_by_child("co_level").equal_to(section_requirements[i][j]).get()
+                    reto_det = list(reto.val().items())
+                    for k in range(len(reto_det)):
+                        if(int(reto_det[k][1]["mark"])==section_requirements[i][j+2] and reto_det[k][1]["difflev"]==section_requirements[i][j+1]):
+                            print("yes")
+                            temp1.append(reto_det[k][1]["question"])
+                            break
+                else:
+                    reto1 = db.child("questions").child(specis[0]).order_by_child("co_level").equal_to(section_requirements[i][j]).get()
+                    reto1_det = list(reto1.val().items())
+                    for l in range(len(reto1_det)):
+                        if(int(reto1_det[l][1]["mark"])==section_requirements[i][j+2] and reto1_det[l][1]["difflev"]==section_requirements[i][j+1]):
+                            thres_ret = threshold(temp1,reto1_det[l][1]["question"])
+                            tempdict.update({reto1_det[l][1]["question"]:thres_ret})
+                    sorted_tempdict = sorted(tempdict)
+                    temp1.append(str(next(iter(sorted_tempdict))))
+        print(temp1)
+        # print(len(temp1))
         name = "Sharwin Xavier R"
         html = render_template(
             "certificate.html",
-            name=name)
+            spects=temp1)
         pdf = pdfkit.from_string(html, configuration=config1)
         response = make_response(pdf)
         response.headers["Content-Type"] = "application/pdf"
@@ -201,6 +218,24 @@ def tempdownproc():
         return response
     else:
         return redirect(url_for('login'))
+    
+def threshold(temp,question):
+        synmatch = 0
+        # match_percent = 0
+        que_spl = question.split()
+        for m in range(len(temp)):
+            temp_spl = temp[m].split()
+            if(len(que_spl)>len(temp_spl)):
+                long = que_spl
+                short = temp_spl
+            else:
+                long = temp_spl
+                short = que_spl
+            for n in short:
+                for o in long:
+                    if(n==o):
+                        synmatch += (1/len(short))*100
+        return synmatch
 
 @app.route("/downproc", methods=["POST","GET"])
 def downproc():
