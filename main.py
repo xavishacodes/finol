@@ -195,19 +195,28 @@ def tempdownproc():
                         if(int(reto_det[k][1]["mark"])==section_requirements[i][j+2] and reto_det[k][1]["difflev"]==section_requirements[i][j+1]):
                             print("yes")
                             temp1.append(reto_det[k][1]["question"])
+                            print(temp1)
                             break
                 else:
                     reto1 = db.child("questions").child(specis[0]).order_by_child("co_level").equal_to(section_requirements[i][j]).get()
                     reto1_det = list(reto1.val().items())
+                    # print(len(reto1_det))
                     for l in range(len(reto1_det)):
                         if(int(reto1_det[l][1]["mark"])==section_requirements[i][j+2] and reto1_det[l][1]["difflev"]==section_requirements[i][j+1]):
                             thres_ret = threshold(temp1,reto1_det[l][1]["question"])
                             tempdict.update({reto1_det[l][1]["question"]:thres_ret})
                     sorted_tempdict = sorted(tempdict)
-                    temp1.append(str(next(iter(sorted_tempdict))))
+                    print("hi")
+                    print(tempdict)
+                    print(sorted_tempdict)
+                    # temp1.append(str(next(iter(sorted_tempdict))))
+                    temp1.append(sorted_tempdict[0])
+                    print(temp1)
+                    tempdict = {}
+                    sorted_tempdict={}
         print(temp1)
         # print(len(temp1))
-        name = "Sharwin Xavier R"
+        # name = "Sharwin Xavier R"
         html = render_template(
             "certificate.html",
             spects=temp1)
@@ -270,7 +279,7 @@ def uproc():
             for i in range(0,len(res2),5):
                 match_percentage = 0
                 global question
-                question_details = {"question":res2[i],"mark":res2[i+1],"co_level":res2[i+2],"ko_level":res2[i+3],"difflev":res2[i+4]}
+                question_details = {"question":res2[i],"mark":res2[i+1],"difflev":res2[i+2],"co_level":res2[i+3],"ko_level":res2[i+4]}
                 temp = db.child("questions").child(a).get()
                 print(temp.val())
                 temp2 = db.child("pending_questions").child(a).get()
