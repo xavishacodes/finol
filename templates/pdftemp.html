@@ -1,0 +1,129 @@
+<html>
+  <head>
+    <title>Template Specifications</title>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body>
+    <h1>PDF Template Specifications</h1>
+    <form
+      name="specdownform"
+      action="http://127.0.0.1:5000/output"
+      method="POST"
+    >
+      {% for dumbo in range(specis1|length) %}
+      <input
+        type="hidden"
+        name="specis1_{{ dumbo }}"
+        value="{{ specis1[dumbo] }}"
+      />
+      {% endfor %} {% for tringo in range(que_specis1|length) %}
+      <input
+        type="hidden"
+        name="que_specis1_{{ tringo }}"
+        value="{{ que_specis1[tringo] }}"
+      />
+      {% endfor %} {% for fouringo in range(section_requirements1|length) %} {%
+      for infouringo in range(section_requirements1[fouringo]|length) %}
+      <input
+        type="hidden"
+        name="section_requirements1_{{ fouringo }}_{{ infouringo }}"
+        value="{{ section_requirements1[fouringo][infouringo] }}"
+      />
+      {% endfor %} {% endfor %} {% for tempo in range(questions|length) %}
+      <input
+        type="hidden"
+        name="question_{{ tempo }}"
+        value="{{ questions[tempo] }}"
+      />
+      {% endfor %}
+      <input type="hidden" name="length_sec" value="{{ lenspec }}" />
+      <div class="col-md-4 col-xs-8">
+        <label class="l1">Question Paper Title ( Header )</label>
+        <input
+          type="text"
+          class="form-control"
+          id="qn_header"
+          placeholder="header"
+          name="heady"
+        />
+      </div>
+      <div class="col-md-4 col-xs-8">
+        <label class="l1">Sub-Header 1</label>
+        <input
+          type="text"
+          class="form-control"
+          id="subheader1"
+          placeholder="sub-header"
+          name="subheady1"
+        />
+      </div>
+      <div class="col-md-4 col-xs-8">
+        <label class="l1">Sub-Header 2</label>
+        <input
+          type="text"
+          class="form-control"
+          id="subheader2"
+          placeholder="sub-header"
+          name="subheady2"
+        />
+      </div>
+      <div class="col-md-4 col-xs-8">
+        <label class="l1">Sub-Header 3</label>
+        <input
+          type="text"
+          class="form-control"
+          id="subheader3"
+          placeholder="sub-header"
+          name="subheady3"
+        />
+      </div>
+      <div class="col-md-4 col-xs-8">
+        <label class="l1">Sub-Header 4</label>
+        <input
+          type="text"
+          class="form-control"
+          id="subheader4"
+          placeholder="sub-header"
+          name="subheady4"
+        />
+      </div>
+      <div class="col-md-4 col-xs-8">
+        <label class="l1">Examination Time</label>
+        <input
+          type="text"
+          class="form-control"
+          id="time"
+          placeholder="Time"
+          name="timey"
+        />
+      </div>
+      <div class="col-md-4 col-xs-8" style="margin-top: 20px">
+        <select
+          name="'section_header'"
+          class="form-select form-select-lg form-control"
+          aria-label=".form-select-lg example"
+        >
+          <option selected>Section Headers Identification</option>
+          <option value="Part">Part</option>
+          <option value="Section">Section</option>
+        </select>
+      </div>
+      <br />
+      <br />
+      <div class="col-md-4 col-xs-8">
+        <button type="submit" class="btn btn-primary" style="margin-top: 20px">
+          Submit
+        </button>
+      </div>
+    </form>
+  </body>
+  <!-- </head> -->
+</html>

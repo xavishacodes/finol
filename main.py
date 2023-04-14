@@ -215,16 +215,9 @@ def tempdownproc():
                     tempdict = {}
                     sorted_tempdict={}
         print(temp1)
-        # print(len(temp1))
-        # name = "Sharwin Xavier R"
-        html = render_template(
-            "certificate.html",
-            spects=temp1)
-        pdf = pdfkit.from_string(html, configuration=config1)
-        response = make_response(pdf)
-        response.headers["Content-Type"] = "application/pdf"
-        response.headers["Content-Disposition"] = "inline; filename=output.pdf"
-        return response
+       
+        
+        return render_template("pdftemp.html",questions = temp1,specis1 = specis, que_specis1=que_specis,section_requirements1=section_requirements,lenspec = specis[2])
     else:
         return redirect(url_for('login'))
     
@@ -245,6 +238,64 @@ def threshold(temp,question):
                     if(n==o):
                         synmatch += (1/len(short))*100
         return synmatch
+
+@app.route("/output",methods=["POST", "GET"])
+def output():
+    if person["is_logged_in"]==True:
+        if request.method=="POST":
+            jes = list(request.form.listvalues())
+            jes2=[]
+            for i in jes:
+                jes2.extend(i)
+            print(jes2)
+        specis = jes2[0:3]
+        print(specis)
+        que_specis=jes2[3:3+int(jes2[2])*2]
+        print(que_specis)
+        jes2=jes2[len(specis)+len(que_specis):]
+        # print(jes2)
+        total_questions=0
+        for x in range(0,len(que_specis),2):
+            total_questions += int(que_specis[x])
+        section_requirements = [[] for i in range(int(specis[2]))]
+        j=0
+        k=0
+        for i in range(0,len(que_specis),2):
+            temp = int(que_specis[i])
+            while(temp):
+                section_requirements[k].append(jes2[j])
+                j=j+1
+                section_requirements[k].append(jes2[j])
+                j=j+1
+                section_requirements[k].append(jes2[j])
+                j=j+1
+                temp=temp-1
+            k=k+1
+        print(section_requirements)
+        jes2=jes2[total_questions*3:]
+        questions = [[] for i in range(int(specis[2]))]
+        l=0
+        m=0
+        for i in range(0,len(que_specis),2):
+            temp1 = int(que_specis[i])
+            while(temp1):
+                questions[m].append(jes2[l])
+                l=l+1
+                temp1=temp1-1
+            m=m+1
+        print(questions)
+        jes2=jes2[total_questions+1:]
+        elements = jes2
+        print(elements)
+        html = render_template(
+            "certificate.html",
+            elements=elements,questions=questions,specis=specis,que_specis=que_specis,section_requirements=section_requirements)
+        pdf = pdfkit.from_string(html, configuration=config1)
+        response = make_response(pdf)
+        response.headers["Content-Type"] = "application/pdf"
+        response.headers["Content-Disposition"] = "inline; filename=output.pdf"
+        return response
+        return 
 
 @app.route("/downproc", methods=["POST","GET"])
 def downproc():

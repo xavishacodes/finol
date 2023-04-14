@@ -1,11 +1,71 @@
 <html>
   <head>
     <title>Qn PDF</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   </head>
+  <style>
+    .headerss {
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: -12px;
+      font-weight: normal;
+    }
+
+    .alignleft {
+      float: left;
+      margin-left: 19px;
+    }
+    .alignright {
+      float: right;
+      margin-right: 19px;
+    }
+    .questions {
+      margin-left: 19px;
+      font-weight: normal;
+    }
+  </style>
   <body>
-    <h1>Question paper</h1>
-    {% for i in spects %}
-    <p>{{ i }}</p>
-    {% endfor %}
+    <!-- <h2></h2> -->
+    <h2 style="text-align: right">
+      Reg No. : ________________________________
+    </h2>
+    <br />
+    {% for i in range(elements|length-2) %} {% if i==0 %}
+    <h2 class="headerss" style="font-weight: bold">{{ elements[i] }}</h2>
+    {% else %}
+    <h3 class="headerss">{{ elements[i] }}</h3>
+    {% endif %} {% endfor %}
+    <!-- <div class="flex-container"> -->
+    <div>
+      <h3 class="alignleft headerss" style="text-transform: capitalize">
+        Time: {{ elements [elements|length-2] }}
+      </h3>
+      <h3 class="alignright headerss" style="text-transform: capitalize">
+        Maximum : {{ specis[1]}} Marks
+      </h3>
+    </div>
+    <br />
+    {% set temp = namespace(value=0) %}
+    <br />
+    {% for i in range(specis[2]|int) %}
+    <div>
+      <br />
+      <br />
+      <h3 class="headerss">{{ elements[elements|length-1] }} {{ i+1 }}</h3>
+      <!-- {% if temp != 0 %} temp=temp+2 {% endif %} -->
+      <h3
+        class="alignright"
+        style="text-transform: capitalize; margin-top: -39px"
+      >
+        ({{que_specis[temp.value]}} * {{que_specis[temp.value+1]|int //
+        que_specis[temp.value]|int}} = {{ que_specis[temp.value+1] }})
+      </h3>
+      {% set temp.value = temp.value+2 %}
+    </div>
+    <br />
+    {% for j in range(questions[i]|length) %}
+    <h3 class="questions">{{j+1}}. {{questions[i][j]}}</h3>
+    {% endfor %} {% endfor %}
+    <!-- </div> -->
   </body>
 </html>
