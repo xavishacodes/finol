@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <title>Verify Questions</title>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename = 'upload.css')}}"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body>
+    <!-- {% for i in range(1,specs|length,5) %}
+    <p>{{specs[i]}}</p>
+    {% endfor %} -->
+    <h2 class="h">Confirm Questions</h2>
+    <br />
+    <br />
+    <div style="width: 100%">
+      <form action="http://127.0.0.1:5000/uproc" method="POST" class="form">
+        <input type="hidden" name="subject" value="{{ specs[0] }}" />
+        {% for i in range(1,specs|length,5) %}
+
+        <div class="form-row justify-content-center">
+          <div
+            class="input-group"
+            style="width: 80%; margin-left: auto; margin-right: auto"
+            ;
+          >
+            <input
+              name="question_{{i}}"
+              type="text"
+              class="form-control"
+              id="name{{i}}"
+              value="{{specs[i]}}"
+              style=""
+              readonly
+            />
+            <input type="hidden" name="mark_{{i}}" value="{{ specs[i+1] }}" />
+            <input type="hidden" name="diff__{{i}}" value="{{ specs[i+2] }}" />
+            <input type="hidden" name="co__{{i}}" value="{{ specs[i+3] }}" />
+            <input type="hidden" name="ko__{{i}}" value="{{ specs[i+4] }}" />
+
+            <div
+              class="input-group-addon"
+              style="
+                background-color: #286090;
+                border-color: #204d74;
+                color: white;
+                flex-basis: 40px;
+              "
+            >
+              <span
+                class="glyphicon glyphicon-pencil"
+                onclick="editName('{{i}}')"
+              ></span>
+            </div>
+          </div>
+        </div>
+
+        <br />
+
+        {% endfor %}
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+    <script>
+      function editName(number) {
+        document.getElementById("name" + number).readOnly = false;
+      }
+    </script>
+  </body>
+</html>

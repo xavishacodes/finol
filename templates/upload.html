@@ -24,7 +24,7 @@
     <!-- <strong> Adding and Deleting Input fields Dynamically</strong> -->
 
     <div style="width: 100%">
-      <form action="http://127.0.0.1:5000/uproc" method="POST" class="form">
+      <form action="http://127.0.0.1:5000/uptemp" method="POST" class="form">
         <div class="">
           <div class="">
             <div class="">
@@ -49,13 +49,17 @@
                   type="text"
                   class=""
                   placeholder="question"
+                  required
                 />
                 <select
                   name="mark_0"
                   class=""
                   aria-label=".form-select-lg example"
+                  required
+                  placeholder="Marks"
                 >
-                  <option selected>Marks</option>
+                  <!-- <option selected>Marks</option> -->
+                  <option value="">Marks</option>
                   <option value="2">Two</option>
                   <option value="7">Seven</option>
                   <option value="8">Eight</option>
@@ -67,8 +71,9 @@
                   name="difflev_0"
                   class=""
                   aria-label=".form-select-lg example"
+                  required
                 >
-                  <option selected>Difficulty Level</option>
+                  <option value="">Difficulty Level</option>
                   <option value="easy">Easy</option>
                   <option value="medium">Medium</option>
                   <option value="hard">Hard</option>
@@ -77,8 +82,9 @@
                   name="co_0"
                   class=""
                   aria-label=".form-select-lg example"
+                  required
                 >
-                  <option selected>Course outcome</option>
+                  <option value="">Course outcome</option>
                   <option value="co_1">CO 1</option>
                   <option value="co_2">CO 2</option>
                   <option value="co_3">CO 3</option>
@@ -89,8 +95,9 @@
                   name="ko_0"
                   class=""
                   aria-label=".form-select-lg example"
+                  required
                 >
-                  <option selected>Knowledge outcome</option>
+                  <option value="">Knowledge outcome</option>
                   <option value="ko_1">KO 1</option>
                   <option value="ko_2">KO 2</option>
                   <option value="ko_3">KO 3</option>
@@ -127,13 +134,13 @@
         temp += 1;
         newRowAdd =
           '<div id="row"> <div class="input-group m-3">' +
-          '<input type="text" size="60 placeholder="question" name="question_' +
+          '<input type="text" size="60 placeholder="question" required name="question_' +
           temp +
           '" class=""> ' +
           '<select name="mark_' +
           temp +
-          '" class="form-select form-select-lg" aria-label=".form-select-lg example">' +
-          "<option selected>Marks</option>" +
+          '" class="form-select form-select-lg" required aria-label=".form-select-lg example">' +
+          "<option value=''>Marks</option>" +
           '<option value="2">Two</option>' +
           '<option value="7">Seven</option>' +
           '<option value="8">Eight</option>' +
@@ -143,8 +150,8 @@
           "</select>" +
           '<select name="difflev_' +
           temp +
-          '" class="form-select form-select-lg" aria-label=".form-select-lg example">' +
-          "<option selected>Difficulty Level</option>" +
+          '" class="form-select form-select-lg" required aria-label=".form-select-lg example">' +
+          "<option value=''>Difficulty Level</option>" +
           '<option value="easy">Easy</option>' +
           '<option value="medium">Medium</option>' +
           '<option value="hard">Hard</option>' +
@@ -152,8 +159,8 @@
           "</select>" +
           '<select name="co_' +
           temp +
-          '" class="form-select form-select-lg" aria-label=".form-select-lg example">' +
-          "<option selected>Course outcome</option>" +
+          '" class="form-select form-select-lg" required aria-label=".form-select-lg example">' +
+          "<option value=''>Course outcome</option>" +
           '<option value="co_1">CO 1</option>' +
           '<option value="co_2">CO 2</option>' +
           '<option value="co_3">CO 3</option>' +
@@ -162,8 +169,8 @@
           "</select>" +
           '<select name="ko_' +
           temp +
-          '" class="form-select form-select-lg" aria-label=".form-select-lg example">' +
-          "<option selected>Knowledge outcome</option>" +
+          '" class="form-select form-select-lg" required aria-label=".form-select-lg example">' +
+          "<option value=''>Knowledge outcome</option>" +
           '<option value="ko_1">KO 1</option>' +
           '<option value="ko_2">KO 2</option>' +
           '<option value="ko_3">KO 3</option>' +

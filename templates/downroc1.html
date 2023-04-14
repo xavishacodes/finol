@@ -1,49 +1,54 @@
 <html>
   <head>
     <title>Download Specifications</title>
-    <body>
-      <form
-        name="downform"
-        action="http://127.0.0.1:5000/tempdownproc"
-        method="POST"
-      >
-        {% for tempo in range(specs|length) %}
-        <input
-          type="hidden"
-          name="specs_{{ tempo }}"
-          value="{{ specs[tempo] }}"
-        />
-        {% endfor %} {% for spec in range(specs[2]|int) %}
-        <h1>Section {{spec}}</h1>
-        {% for blah in range(specs[3+(2*spec)]|int) %}
-        <p>Question {{blah}}</p>
-        <select
-          name="'section_{{spec}}_question_{{blah}}_co'"
-          class="form-select form-select-lg"
-          aria-label=".form-select-lg example"
-        >
-          <option selected>Choose CO-level</option>
-          <option value="co_1">CO 1</option>
-          <option value="co_2">CO 2</option>
-          <option value="co_3">CO 3</option>
-          <option value="co_4">CO 4</option>
-          <option value="co_5">CO 5</option>
-        </select>
-        <select
-          name="'section_{{spec}}_question_{{blah}}_di'"
-          class="form-select form-select-lg"
-          aria-label=".form-select-lg example"
-        >
-          <option selected>Choose Diff level</option>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-        {% endfor %} {% endfor %}
-        <br />
-        <br />
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </body>
+    <!-- <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename = 'download.css')}}"
+    /> -->
   </head>
+  <body>
+    <form
+      name="downform"
+      action="http://127.0.0.1:5000/tempdownproc"
+      method="POST"
+    >
+      {% for tempo in range(specs|length) %}
+      <input
+        type="hidden"
+        name="specs_{{ tempo }}"
+        value="{{ specs[tempo] }}"
+      />
+      {% endfor %} {% for spec in range(specs[2]|int) %}
+      <h1 class="le">Section {{spec+1}}</h1>
+      {% for blah in range(specs[3+(2*spec)]|int) %}
+      <p>Question {{blah+1}}</p>
+      <select
+        name="'section_{{spec}}_question_{{blah}}_co'"
+        class="form-select form-select-lg"
+        aria-label=".form-select-lg example"
+      >
+        <option selected>Choose CO-level</option>
+        <option value="co_1">CO 1</option>
+        <option value="co_2">CO 2</option>
+        <option value="co_3">CO 3</option>
+        <option value="co_4">CO 4</option>
+        <option value="co_5">CO 5</option>
+      </select>
+      <select
+        name="'section_{{spec}}_question_{{blah}}_di'"
+        class="form-select form-select-lg"
+        aria-label=".form-select-lg example"
+      >
+        <option selected>Choose Diff level</option>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+      {% endfor %} {% endfor %}
+      <br />
+      <br />
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </body>
 </html>

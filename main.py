@@ -302,6 +302,20 @@ def downproc():
     if(person["is_logged_in"]==True):
         return "hi"
     
+@app.route("/uptemp",methods=["POST","GET"])
+def uptemp():
+    if(person["is_logged_in"]==True):
+        if request.method == "POST":
+            res1 = list(request.form.listvalues())
+            print(res1)
+            res2=[]
+            for i in res1:
+                res2.extend(i)
+            return render_template("uptemp.html",specs=res2)
+        else:
+            return redirect(url_for('welcome'))
+    return 'hi'
+
 @app.route("/uproc", methods=["POST","GET"])
 def uproc():
     if request.method == "POST":
@@ -359,7 +373,7 @@ def uproc():
                     #     db.child("validators").order_by_child("validator subject").equal_to(a).child("pending").child(str(len(temp2.val()))).set(question_details)
                     # else:
                     #     db.child("validators").order_by_child("validator subject").equal_to(a).child("pending").child("0").set(question_details)
-            return 'hi'
+            return 'Uploaded successfully'
         except:
             return 'failed'
         
