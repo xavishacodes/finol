@@ -42,13 +42,6 @@
     </style>
 
     <title>Add Subject</title>
-    <script>
-      $(document).ready(function () {
-        $("#addnewb").click(function () {
-          $("#addnew").toggle(500);
-        });
-      });
-    </script>
   </head>
   <body>
     <p class="le">Add new subject</p>
@@ -83,7 +76,13 @@
       <div class="row">
         <div class="col-md-8 col-xs-12">
           <label class="l">Syllabus</label>
-          <textarea class="form-control" rows="9" name="syllabus"></textarea>
+          <input id="inputfile" type="file" style="color: white" />
+          <textarea
+            id="texty"
+            class="form-control"
+            rows="9"
+            name="syllabus"
+          ></textarea>
         </div>
       </div>
       <br />
@@ -128,5 +127,30 @@
       <button type="submit" class="btn btn-primary">OK</button>
       <button type="button" class="btn btn-info">CANCEL</button>
     </form>
+    <script>
+      $(document).ready(function () {
+        $("#addnewb").click(function () {
+          $("#addnew").toggle(500);
+        });
+      });
+      // var file = document.getElementById("myFile").files[0];
+      // var reader = new FileReader();
+      // reader.onload = function (e) {
+      //   var textArea = document.getElementById("texty");
+      //   textArea.value = e.target.result;
+      // };
+      // reader.readAsText(file);
+      document
+        .getElementById("inputfile")
+        .addEventListener("change", function () {
+          var fr = new FileReader();
+          fr.onload = function () {
+            document.getElementById("texty").textContent = fr.result;
+          };
+
+          var printy = fr.readAsText(this.files[0]);
+          console.log(printy.toString());
+        });
+    </script>
   </body>
 </html>
