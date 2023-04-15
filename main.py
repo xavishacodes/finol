@@ -194,7 +194,10 @@ def tempdownproc():
                     for k in range(len(reto_det)):
                         if(int(reto_det[k][1]["mark"])==section_requirements[i][j+2] and reto_det[k][1]["difflev"]==section_requirements[i][j+1]):
                             print("yes")
-                            temp1.append(reto_det[k][1]["question"])
+                            if(reto_det[k][1]["img_url"]):
+                                temp1.append(reto_det[k][1]["question"] + '|' + reto_det[k][1]["img_url"])
+                            else:
+                                temp1.append(reto_det[k][1]["question"])
                             print(temp1)
                             break
                 else:
@@ -204,7 +207,10 @@ def tempdownproc():
                     for l in range(len(reto1_det)):
                         if(int(reto1_det[l][1]["mark"])==section_requirements[i][j+2] and reto1_det[l][1]["difflev"]==section_requirements[i][j+1]):
                             thres_ret = threshold(temp1,reto1_det[l][1]["question"])
-                            tempdict.update({reto1_det[l][1]["question"]:thres_ret})
+                            if(reto1_det[l][1]["img_url"]):
+                                tempdict.update({reto1_det[l][1]["question"] + '|' + reto1_det[l][1]["img_url"]:thres_ret})
+                            else:
+                                tempdict.update({reto1_det[l][1]["question"]:thres_ret})
                     sorted_tempdict = sorted(tempdict)
                     print("hi")
                     print(tempdict)
@@ -311,6 +317,7 @@ def uptemp():
             res2=[]
             for i in res1:
                 res2.extend(i)
+            print(res2)
             return render_template("uptemp.html",specs=res2)
         else:
             return redirect(url_for('welcome'))
@@ -341,10 +348,10 @@ def uproc():
         syllspl = tes2[1]["syllabus"].split()
         
         try:
-            for i in range(0,len(res2),5):
+            for i in range(0,len(res2),6):
                 match_percentage = 0
                 global question
-                question_details = {"question":res2[i],"mark":res2[i+1],"difflev":res2[i+2],"co_level":res2[i+3],"ko_level":res2[i+4]}
+                question_details = {"question":res2[i],"mark":res2[i+1],"difflev":res2[i+2],"co_level":res2[i+3],"ko_level":res2[i+4],"img_url":res2[i+5]}
                 temp = db.child("questions").child(a).get()
                 print(temp.val())
                 temp2 = db.child("pending_questions").child(a).get()
@@ -400,6 +407,9 @@ def accept_question(subjectcode, question):
     # db.child("subjects").child(str(len(sub_list_1.val()))).set(subject_details)
     stemp = db.child("questions").child(subjectcode).get()
     que_det = list(valpro.val().items())[0][1]
+    # if(len(stemp.val())==0):
+    #     db.child("questions").child(subjectcode).child("0").set(que_det)
+    # else:
     db.child("questions").child(subjectcode).child(str(len(stemp.val()))).set(que_det)
     db.child("pending_questions").child(subjectcode).child(list(valpro.val().items())[0][0]).remove()
     return jsonify({'success': True})

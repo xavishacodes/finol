@@ -42,7 +42,7 @@
             <label for="marks" class="l">Total marks of the exam</label>
             <input type="text" name="marks" id="marks" />
             <label class="l" for="no_sections"
-              >Number of sections needed in the question paper</label
+              >Number of sections in the question paper</label
             >
             <select
               name="no_sections"
@@ -88,6 +88,17 @@
                 })
                 .appendTo("#newinput")
                 .wrap($("<div/>"));
+              $;
+
+              blah =
+                '<div style="display:flex;margin-top:5px;">' +
+                '<h6 style="color:white; margin-bottom:0em;">Is this a Either Or section?</h6>' +
+                '<input style="margin-left:5px;" type="radio" id="html" name="fav_language" value="HTML">' +
+                '<label style="margin-bottom:0em;color:white;" for="html" ">Yes</label><br>' +
+                '<input style="margin-left:5px;" type="radio" id="css" name="fav_language" value="CSS">' +
+                '<label style="margin-bottom:0em;color:white;" for="css" ">No</label><br>' +
+                "</div>";
+              $("#newinput").append(blah);
             }
           });
         });

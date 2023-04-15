@@ -45,7 +45,7 @@
               <div class="input-group m-3">
                 <input
                   name="question_0"
-                  size="60"
+                  size="35"
                   type="text"
                   class=""
                   placeholder="question"
@@ -106,9 +106,23 @@
                   
                 </select>
                 <div class="">
+                  <button class="btn btn-success" id="addimage_0" type="button" onClick="showImg(0)">
+                    <i class="bi bi-image"></i>
+                    <i class="bi bi-file-earmark-plus-fill"></i>
+                    
+                  </button>
+                  <input
+                  name="image_0"
+                  size="25"
+                  type="text"
+                  class="bush"
+                  placeholder="Image URL"
+                  style="display:none"
+                  id="image_0"
+                />
                   <button class="btn btn-danger" id="DeleteRow" type="button">
                     <i class="bi bi-trash"></i>
-                    Delete
+                
                   </button>
                 </div>
               </div>
@@ -130,11 +144,26 @@
 
     <script type="text/javascript">
       var temp = 0;
+      
+      // $(document).ready(function () {
+      //   $("#addimage").click(function () {
+      //     $(".bush").toggle(500);
+      //   });
+      // });
+      function showImg(number) {
+       
+          $("#image_"+number).toggle(500);
+       
+      };
+      // function showImg(number) {
+      //   ("image_" + number).toggle(500);
+
+      // }
       $("#rowAdder").click(function () {
         temp += 1;
         newRowAdd =
           '<div id="row"> <div class="input-group m-3">' +
-          '<input type="text" size="60 placeholder="question" required name="question_' +
+          '<input type="text" size="35" placeholder="question" required name="question_' +
           temp +
           '" class=""> ' +
           '<select name="mark_' +
@@ -177,9 +206,12 @@
           '<option value="ko_4">KO 4</option>' +
           '<option value="ko_5">KO 5</option>' +
           "</select>" +
-          '<div class="input-group-append">' +
-          '<button class="btn btn-danger" id="DeleteRow" type="button">' +
-          '<i class="bi bi-trash"></i> Delete</button> </div></div></div>';
+          '<div class="">' +
+          '<button class="btn btn-success" id="addimage_'+temp+'" type="button" onClick="showImg('+temp+')">' +
+          '<i class="bi bi-image"></i><i class="bi bi-file-earmark-plus-fill"></i> </button> '+
+          '<input name="image_'+temp+'" size="25" type="text" class="bush" placeholder="Image URL" style="display:none" id="image_'+temp+'"/>'+
+          '<button class="btn btn-danger" id="DeleteRow" type="button">'+
+          '<i class="bi bi-trash"></i></button></div></div></div>';
 
         $("#newinput").append(newRowAdd);
       });
