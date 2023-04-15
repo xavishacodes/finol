@@ -51,8 +51,11 @@
     <div>
       <br />
       <br />
-      <h3 class="headerss">{{ elements[elements|length-1] }} {{ i+1 }}</h3>
+      <h3 class="headerss">
+        {{ elements[elements|length-1] }} - {{ (i+65|int) | ascii_to_char }}
+      </h3>
       <!-- {% if temp != 0 %} temp=temp+2 {% endif %} -->
+      {% if que_specis[temp.value+2]=='or' %}
       <h3
         class="alignright"
         style="text-transform: capitalize; margin-top: -39px"
@@ -60,17 +63,32 @@
         ({{que_specis[temp.value]}} * {{que_specis[temp.value+1]|int //
         que_specis[temp.value]|int}} = {{ que_specis[temp.value+1] }})
       </h3>
-      {% set temp.value = temp.value+2 %}
+      {% else %}
+      <h3
+        class="alignright"
+        style="text-transform: capitalize; margin-top: -39px"
+      >
+        ({{que_specis[temp.value]|int // 2}} * {{que_specis[temp.value+1]|int //
+        que_specis[temp.value]|int}} = {{ que_specis[temp.value+1]|int //2 }})
+      </h3>
+      {% endif %}
     </div>
     <br />
     {% for j in range(questions[i]|length) %} {% set temp_list =
-    questions[i][j].split('|') %}
+    questions[i][j].split('|') %} {% if que_specis[temp.value+2]=='either' and
+    j%2==0 %}
+    <h3 class="questions">{{j//2 + 1}}. {{temp_list[0]}}</h3>
+    {% elif que_specis[temp.value+2]=='either' and j%2!=0 %}
+    <h3 class="questions" style="margin-left: 39px">{{temp_list[0]}}</h3>
+    {% else %}
     <h3 class="questions">{{j+1}}. {{temp_list[0]}}</h3>
-    {% if(temp_list[1]) %}
+    {% endif %} {% if(temp_list[1]) %}
     <div style="margin-left: 42px">
-      <img src="{{temp_list[1]}}" height="200" width="600" />
+      <img src="{{temp_list[1]}}" height="170" width="600" />
     </div>
-    {% endif %} {% endfor %} {% endfor %}
+    {% endif %} {% if j%2==0 and (que_specis[temp.value+2])=='either' %}
+    <h4 class="headerss">{or}</h4>
+    {% endif %} {% endfor %} {% set temp.value = temp.value+3 %}{% endfor %}
     <!-- </div> -->
   </body>
 </html>

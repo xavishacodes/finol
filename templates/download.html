@@ -93,10 +93,18 @@
               blah =
                 '<div style="display:flex;margin-top:5px;">' +
                 '<h6 style="color:white; margin-bottom:0em;">Is this a Either Or section?</h6>' +
-                '<input style="margin-left:5px;" type="radio" id="html" name="fav_language" value="HTML">' +
-                '<label style="margin-bottom:0em;color:white;" for="html" ">Yes</label><br>' +
-                '<input style="margin-left:5px;" type="radio" id="css" name="fav_language" value="CSS">' +
-                '<label style="margin-bottom:0em;color:white;" for="css" ">No</label><br>' +
+                '<input style="margin-left:5px;" type="radio" id="either_' +
+                count_item +
+                '" name="eitheror_' +
+                count_item +
+                '" value="either">' +
+                '<label style="margin-bottom:0em;color:white;" for="either" ">Yes</label><br>' +
+                '<input style="margin-left:5px;" type="radio" id="or_' +
+                count_item +
+                '" name="eitheror_' +
+                count_item +
+                '" value="or">' +
+                '<label style="margin-bottom:0em;color:white;" for="or" ">No</label><br>' +
                 "</div>";
               $("#newinput").append(blah);
             }

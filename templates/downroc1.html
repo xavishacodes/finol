@@ -21,7 +21,7 @@
       />
       {% endfor %} {% for spec in range(specs[2]|int) %}
       <h1 class="le">Section {{spec+1}}</h1>
-      {% for blah in range(specs[3+(2*spec)]|int) %}
+      {% for blah in range(specs[3+(3*spec)]|int) %}
       <p>Question {{blah+1}}</p>
       <select
         name="'section_{{spec}}_question_{{blah}}_co'"

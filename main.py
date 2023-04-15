@@ -145,6 +145,7 @@ def downroc1():
             for i in ress1:
                 ress2.extend(i)
             print(ress2)
+        # return 'hi'
         return render_template("downroc1.html", email=person["email"], name = person["name"], specs=ress2)
     else:
         return redirect(url_for('login'))
@@ -161,7 +162,7 @@ def tempdownproc():
             print(res2)
         specis = res2[0:3]
         print(specis)
-        que_specis=res2[3:3+int(res2[2])*2]
+        que_specis=res2[3:3+int(res2[2])*3]
         print(que_specis)
         res2=res2[len(specis)+len(que_specis):]
         print(res2)
@@ -169,7 +170,7 @@ def tempdownproc():
         section_requirements = [[] for i in range(int(specis[2]))]
         j=0
         k=0
-        for i in range(0,len(que_specis),2):
+        for i in range(0,len(que_specis),3):
             print(que_specis[i])
             temp = int(que_specis[i])
             marks = int(que_specis[i+1])//int(que_specis[i])
@@ -222,7 +223,7 @@ def tempdownproc():
                     sorted_tempdict={}
         print(temp1)
        
-        
+        # return 'hi'
         return render_template("pdftemp.html",questions = temp1,specis1 = specis, que_specis1=que_specis,section_requirements1=section_requirements,lenspec = specis[2])
     else:
         return redirect(url_for('login'))
@@ -256,17 +257,17 @@ def output():
             print(jes2)
         specis = jes2[0:3]
         print(specis)
-        que_specis=jes2[3:3+int(jes2[2])*2]
+        que_specis=jes2[3:3+int(jes2[2])*3]
         print(que_specis)
         jes2=jes2[len(specis)+len(que_specis):]
         # print(jes2)
         total_questions=0
-        for x in range(0,len(que_specis),2):
+        for x in range(0,len(que_specis),3):
             total_questions += int(que_specis[x])
         section_requirements = [[] for i in range(int(specis[2]))]
         j=0
         k=0
-        for i in range(0,len(que_specis),2):
+        for i in range(0,len(que_specis),3):
             temp = int(que_specis[i])
             while(temp):
                 section_requirements[k].append(jes2[j])
@@ -282,7 +283,7 @@ def output():
         questions = [[] for i in range(int(specis[2]))]
         l=0
         m=0
-        for i in range(0,len(que_specis),2):
+        for i in range(0,len(que_specis),3):
             temp1 = int(que_specis[i])
             while(temp1):
                 questions[m].append(jes2[l])
@@ -577,6 +578,10 @@ def register():
             return redirect(url_for('welcome'))
         else:
             return redirect(url_for('register'))
+        
+@app.template_filter('ascii_to_char')
+def ascii_to_char(value):
+    return chr(int(value))
 
 if __name__ == "__main__":
     app.run(debug=True)
