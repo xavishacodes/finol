@@ -6,8 +6,46 @@
       type="text/css"
       href="{{url_for('static', filename = 'download.css')}}"
     /> -->
+    <link
+      rel="stylesheet"
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename = 'download.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename = 'logout.css')}}"
+    />
+    <style>
+      body {
+        align-items: flex-start;
+      }
+    </style>
   </head>
   <body>
+    <a href="http://127.0.0.1:5000/logout">
+      <button
+        type="button"
+        style="
+          float: right;
+          padding: 7px 35px;
+          text-transform: capitalize;
+          margin-top: -1em;
+          margin-right: -60em;
+        "
+        class="btn btn-outline-info logoutbut btn-2"
+      >
+        Logout
+      </button>
+    </a>
     <form
       name="downform"
       action="http://127.0.0.1:5000/tempdownproc"
@@ -20,9 +58,11 @@
         value="{{ specs[tempo] }}"
       />
       {% endfor %} {% for spec in range(specs[2]|int) %}
-      <h1 class="le">Section {{spec+1}}</h1>
+      <h1 class="le" style="margin-top: -1.4em; padding-bottom: 0.25em">
+        Section {{spec+1}}
+      </h1>
       {% for blah in range(specs[3+(3*spec)]|int) %}
-      <p>Question {{blah+1}}</p>
+      <p style="color: #dccaa0">Question {{blah+1}}</p>
       <select
         name="'section_{{spec}}_question_{{blah}}_co'"
         class="form-select form-select-lg"

@@ -9,7 +9,7 @@ import pdfkit
 import random
 
 app = Flask(__name__)       #Initialze flask constructor
-
+app.config['SECRET_KEY'] = 'shar'
 #Add your own details
 config = {
   "apiKey": "AIzaSyD1cQdqd0JFGIu6kxF8Pl7uf9GSf_AMytk",
@@ -34,6 +34,11 @@ config1 = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\
 def login():
     return render_template("login.html")
 
+@app.route('/logout')
+def logout():
+    person["is_logged_in"]=False
+    return redirect(url_for('login'))
+
 #Sign up/ Register
 @app.route("/signup")
 def signup():
@@ -47,6 +52,7 @@ def vsignin():
 @app.route("/welcome")
 def welcome():
     if person["is_logged_in"] == True:
+        # messages=get_flashed_messages()
         return render_template("welcome.html", email = person["email"], name = person["name"])
     else:
         return redirect(url_for('login'))
@@ -381,7 +387,9 @@ def uproc():
                     #     db.child("validators").order_by_child("validator subject").equal_to(a).child("pending").child(str(len(temp2.val()))).set(question_details)
                     # else:
                     #     db.child("validators").order_by_child("validator subject").equal_to(a).child("pending").child("0").set(question_details)
-            return 'Uploaded successfully'
+            flash("Uploaded successfully!")
+            return redirect(url_for('welcome'))
+            # return 
         except:
             return 'failed'
         

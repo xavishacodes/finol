@@ -7,12 +7,42 @@
       rel="stylesheet"
       type="text/css"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename = 'download.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename = 'logout.css')}}"
+    />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <style>
+      label {
+        color: white;
+      }
+    </style>
   </head>
   <body>
-    <h1>PDF Template Specifications</h1>
+    <a href="http://127.0.0.1:5000/logout">
+      <button
+        type="button"
+        style="
+          float: right;
+          padding: 7px 35px;
+          text-transform: capitalize;
+          margin-top: -1em;
+          margin-right: -29em;
+        "
+        class="btn btn-outline-info logoutbut btn-2"
+      >
+        Logout
+      </button>
+    </a>
+    <h1 class="le">PDF Template Specifications</h1>
     <form
       name="specdownform"
       action="http://127.0.0.1:5000/output"
@@ -116,10 +146,9 @@
           <option value="Section">Section</option>
         </select>
       </div>
-      <br />
-      <br />
-      <div class="col-md-4 col-xs-8">
-        <button type="submit" class="btn btn-primary" style="margin-top: 20px">
+
+      <div class="col-md-4 col-xs-8 text-center">
+        <button type="submit" class="btn btn-primary" style="margin-top: 6.5em">
           Submit
         </button>
       </div>

@@ -10,6 +10,11 @@
     <link rel="stylesheet" type="text/css" href="../static/upload.css" />
     <link
       rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename = 'logout.css')}}"
+    />
+    <link
+      rel="stylesheet"
       href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     />
     <link
@@ -20,6 +25,16 @@
   </head>
 
   <body>
+    <a href="http://127.0.0.1:5000/logout">
+      <button
+        type="button"
+        style="float: right; padding: 7px 35px; text-transform: capitalize;    margin-top: -1em;
+    margin-right: -29em;"
+        class="btn btn-outline-info logoutbut btn-2"
+      >
+        Logout
+      </button>
+    </a>
     <p class="h">Upload Questions</p>
     <!-- <strong> Adding and Deleting Input fields Dynamically</strong> -->
 

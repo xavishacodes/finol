@@ -7,6 +7,11 @@
       type="text/css"
       href="{{url_for('static', filename = 'download.css')}}"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename = 'logout.css')}}"
+    />
     <link rel="stylesheet" type="text/css" href="../static/download.css" />
     <link
       rel="stylesheet"
@@ -20,6 +25,21 @@
   </head>
 
   <body>
+    <a href="http://127.0.0.1:5000/logout">
+      <button
+        type="button"
+        style="
+          float: right;
+          padding: 7px 35px;
+          text-transform: capitalize;
+          margin-top: -1.5em;
+          margin-right: -29em;
+        "
+        class="btn btn-outline-info logoutbut btn-2"
+      >
+        Logout
+      </button>
+    </a>
     <p class="le">Download Question Paper</p>
     <!-- <strong> Adding and Deleting Input fields Dynamically</strong> -->
 

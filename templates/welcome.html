@@ -10,6 +10,26 @@
     <link rel="stylesheet" type="text/css" href="../static/welcome.css" />
   </head>
   <body>
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for
+    message in messages %}
+    <div class="alert alert-success" role="alert">
+      <p style="color: #00ff3f; float: left; margin-top: -7em">{{ message }}</p>
+    </div>
+    {% endfor %} {% endif %} {% endwith %}
+    <a href="http://127.0.0.1:5000/logout">
+      <button
+        type="button"
+        style="
+          float: right;
+          margin-top: -6em;
+          padding: 7px 35px;
+          text-transform: capitalize;
+        "
+        class="btn btn-outline-info logoutbut btn-2"
+      >
+        Logout
+      </button>
+    </a>
     <div class="main">
       <h1 class="name">Hi, {{name}}</h1>
       <h3 class="email">What do you want to do?</h3>

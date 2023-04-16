@@ -10,9 +10,29 @@
       type="text/css"
       href="{{url_for('static', filename = 'dashboard.css')}}"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename = 'logout.css')}}"
+    />
     <link rel="stylesheet" type="text/css" href="../static/dashboard.css" />
   </head>
   <body>
+    <a href="http://127.0.0.1:5000/logout">
+      <button
+        type="button"
+        style="
+          float: right;
+          padding: 7px 35px;
+          text-transform: capitalize;
+          margin-top: 0.1em;
+          margin-right: -30em;
+        "
+        class="btn btn-outline-info logoutbut btn-2"
+      >
+        Logout
+      </button>
+    </a>
     <p class="h">Admin Dashboard</p>
     <p class="l">List of available subjects</p>
     {% for p in places %}

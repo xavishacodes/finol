@@ -8,6 +8,11 @@
       href="{{url_for('static', filename = 'upload.css')}}"
     />
     <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename = 'logout.css')}}"
+    />
+    <link
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
       rel="stylesheet"
       type="text/css"
@@ -17,9 +22,21 @@
     <meta name="viewport" content="width=device-width" />
   </head>
   <body>
-    <!-- {% for i in range(1,specs|length,5) %}
-    <p>{{specs[i]}}</p>
-    {% endfor %} -->
+    <a href="http://127.0.0.1:5000/logout">
+      <button
+        type="button"
+        style="
+          float: right;
+          padding: 7px 35px;
+          text-transform: capitalize;
+          margin-top: -1em;
+          margin-right: -29em;
+        "
+        class="btn btn-outline-info logoutbut btn-2"
+      >
+        Logout
+      </button>
+    </a>
     <h2 class="h">Confirm Questions</h2>
     <br />
     <br />
