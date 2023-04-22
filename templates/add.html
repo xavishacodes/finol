@@ -8,6 +8,7 @@
       type="text/css"
     />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.min.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <style>
@@ -145,9 +146,14 @@
         .addEventListener("change", function () {
           var fr = new FileReader();
           fr.onload = function () {
+            // console.log(this.files[0].type);
+            var temp = document.getElementById("texty");
             document.getElementById("texty").textContent = fr.result;
+            // console.log(temp.value);
           };
-
+          console.log(this.files[0].type);
+          if (this.files[0].type === "application/pdf") {
+          }
           var printy = fr.readAsText(this.files[0]);
           console.log(printy.toString());
         });

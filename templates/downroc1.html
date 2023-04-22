@@ -58,9 +58,7 @@
         value="{{ specs[tempo] }}"
       />
       {% endfor %} {% for spec in range(specs[2]|int) %}
-      <h1 class="le" style="margin-top: -1.4em; padding-bottom: 0.25em">
-        Section {{spec+1}}
-      </h1>
+      <h1 class="le" style="padding-bottom: 0.15em">Section {{spec+1}}</h1>
       {% for blah in range(specs[3+(3*spec)]|int) %}
       <p style="color: #dccaa0">Question {{blah+1}}</p>
       <select
