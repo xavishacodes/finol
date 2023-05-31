@@ -26,11 +26,20 @@
   </style>
   <body>
     <!-- <h2></h2> -->
-    <h2 style="text-align: right">
-      Reg No. : ________________________________
-    </h2>
+    <div>
+      <h2
+        style="text-align: left; margin-top: -3px; font-weight: normal"
+        class="alignleft"
+      >
+        Date : {{ elements[elements|length-1] }}
+      </h2>
+      <h2 style="text-align: right">
+        Reg No. : ________________________________
+      </h2>
+    </div>
+
     <br />
-    {% for i in range(elements|length-2) %} {% if i==0 %}
+    {% for i in range(elements|length-3) %} {% if i==0 %}
     <h2 class="headerss" style="font-weight: bold">{{ elements[i] }}</h2>
     {% else %}
     <h3 class="headerss">{{ elements[i] }}</h3>
@@ -38,7 +47,7 @@
     <!-- <div class="flex-container"> -->
     <div>
       <h3 class="alignleft headerss" style="text-transform: capitalize">
-        Time: {{ elements [elements|length-2] }}
+        Time: {{ elements [elements|length-3] }}
       </h3>
       <h3 class="alignright headerss" style="text-transform: capitalize">
         Maximum : {{ specis[1]}} Marks
@@ -52,7 +61,7 @@
       <br />
       <br />
       <h3 class="headerss">
-        {{ elements[elements|length-1] }} - {{ (i+65|int) | ascii_to_char }}
+        {{ elements[elements|length-2] }} - {{ (i+65|int) | ascii_to_char }}
       </h3>
       <!-- {% if temp != 0 %} temp=temp+2 {% endif %} -->
       {% if que_specis[temp.value+2]=='or' %}

@@ -66,7 +66,7 @@
       {% for i in range(len1|int) %}
       <div class="card" style="width: 18rem; display: inline-block">
         <div class="card-body">
-          <h5 class="card-title need" value="'{{ i }}">Question {{i}}</h5>
+          <h5 class="card-title need" value="'{{ i }}">Question {{i+1}}</h5>
           <p class="card-text need" value="'{{ specs1[i]['question'] }}'">
             {{ specs1[i]["question"] }}
           </p>

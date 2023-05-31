@@ -91,6 +91,11 @@
           $("#rowAdder").on("click", function () {
             count_item += 1;
             if (count_item <= 5) {
+              blah1 =
+                '<p style="color:white;margin-bottom:1.5px;">Number of Questions in Section ' +
+                count_item +
+                "</p>";
+              $("#newinput").append(blah1);
               $("<input/>")
                 .attr({
                   type: "number",
@@ -99,7 +104,12 @@
                   style: "width:60%;",
                 })
                 .appendTo("#newinput")
-                .wrap($("<div/>"));
+                .wrap($("<div />"));
+              blah2 =
+                '<p style="color:white;margin-bottom:1.5px;">Marks of Section ' +
+                count_item +
+                "</p>";
+              $("#newinput").append(blah2);
               $("<input/>")
                 .attr({
                   type: "number",

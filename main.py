@@ -7,8 +7,11 @@ from flask import render_template
 from flask import make_response
 import pdfkit
 import random
+from flask_socketio import SocketIO
+
 
 app = Flask(__name__)       #Initialze flask constructor
+socketio = SocketIO(app)
 app.config['SECRET_KEY'] = 'shar'
 #Add your own details
 config = {
@@ -66,6 +69,12 @@ def dashboard():
 
     else:
         return redirect(url_for('login'))
+    
+# @app.route('/filter_subjects', methods=['POST'])
+# def filter_subjects():
+#     semester = request.json['semester'] # Assuming the selected semester is passed in as a JSON object
+#     filtered_data = db.child('subjects').order_by_child('semester').equal_to(semester); # Your function to retrieve filtered data from Firebase
+#     return jsonify(filtered_data)
 
 @app.route("/add")
 def add():
@@ -81,13 +90,14 @@ def newsub():
         res1 = request.form 
         subject_name=res1["subject_name"]
         subject_code=res1["subject_code"]
+        semester = res1["semester"]
         syllabus=res1["syllabus"]
         validator_email=res1["valem"]
         validator_name=res1["valname"]
         validator_password=res1["valpass"]
         try:
             global subject 
-            subject_details = {"subject name": subject_name, "subject code": subject_code, "syllabus": syllabus, "validator name": validator_name, "validator password": validator_password, "validator email": validator_email}
+            subject_details = {"subject name": subject_name, "subject code": subject_code, "semester": semester, "syllabus": syllabus, "validator name": validator_name, "validator password": validator_password, "validator email": validator_email}
             sub_list_1 = db.child('subjects').get()
             db.child("subjects").child(str(len(sub_list_1.val()))).set(subject_details)
             validator_details = {"validator email": validator_email, "validator password": validator_password, "validator name": validator_name, "validator subject": subject_code, "validator subject name": subject_name}
@@ -150,6 +160,11 @@ def downroc1():
             ress2=[]
             for i in ress1:
                 ress2.extend(i)
+            print(ress2)
+            for i in range(5,len(ress2),3):
+                if(ress2[i]=='either'):
+                    ress2[i-1]=str(int(ress2[i-1])*2)
+                    ress2[i-2]=str(int(ress2[i-2])*2)
             print(ress2)
         # return 'hi'
         return render_template("downroc1.html", email=person["email"], name = person["name"], specs=ress2)

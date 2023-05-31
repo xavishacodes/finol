@@ -16,6 +16,7 @@
       href="{{url_for('static', filename = 'logout.css')}}"
     />
     <link rel="stylesheet" type="text/css" href="../static/dashboard.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
     <a href="http://127.0.0.1:5000/logout">
@@ -35,13 +36,55 @@
     </a>
     <p class="h">Admin Dashboard</p>
     <p class="l">List of available subjects</p>
-    {% for p in places %}
-    <p class="e">{{ p["subject code"] }} - {{ p["subject name"] }}</p>
-    {% endfor %}
+    <select
+      name="semester_no"
+      class="drop"
+      aria-label=".form-select-lg example"
+      required
+      id="sem_no"
+    >
+      <option value="0">Choose Semester</option>
+
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+    </select>
+    <div id="all" style="display: initial">
+      {% for p in places %}
+      <p class="e">{{ p["subject code"] }} - {{ p["subject name"] }}</p>
+      {% endfor %}
+    </div>
+    <div id="sem-sel"></div>
     <a href="http://127.0.0.1:5000/add">
       <button type="button" class="btn btn-dark">
         <div class="bi bi-plus-square-dotted">&nbspAdd new subject</div>
       </button>
     </a>
+    <script>
+      var dropdown = document.getElementById("sem_no");
+
+      dropdown.addEventListener("change", function () {
+        var selectedSemester = dropdown.value;
+        console.log("Selected semester: " + selectedSemester);
+        if (selectedSemester != 0) {
+          const element1 = document.getElementById("all");
+          element1.style.display = "none";
+          var newhtml = '<div id="select-sem">';
+          let txtsem = selectedSemester.toString();
+          {% for i in places %}
+          {% if i["semester"] == '6' %}
+          console.log("hi")
+          newhtml += '<p class="e">{{ i["subject code"] }} - {{ i["subject name"] }}</p>';
+          {% endif %}
+          {% endfor %}
+          newhtml += "</div>";
+          jQuery("#sem-sel").append(newhtml);
+        }
+      });
+    </script>
   </body>
 </html>
